@@ -1,0 +1,362 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * KEDEM — Global Technology & Innovation Summit 2027
+ * Design system: deep navy canvas, AOS blue -> AOS green gradients.
+ * All colors in oklch. Never hardcode colors in components.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-navy: var(--navy);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+:root {
+  --radius: 0.375rem;
+
+  --background: oklch(0.17 0.032 248);
+  --foreground: oklch(0.97 0.006 248);
+  --surface: oklch(0.22 0.038 248);
+  --surface-2: oklch(0.26 0.042 248);
+  --navy: oklch(0.28 0.055 250);
+
+  --card: oklch(0.22 0.038 248);
+  --card-foreground: oklch(0.97 0.006 248);
+  --popover: oklch(0.20 0.036 248);
+  --popover-foreground: oklch(0.97 0.006 248);
+
+  --primary: oklch(0.58 0.165 259);
+  --primary-foreground: oklch(0.98 0.005 248);
+  --secondary: oklch(0.26 0.042 248);
+  --secondary-foreground: oklch(0.97 0.006 248);
+
+  --accent: oklch(0.76 0.175 133);
+  --accent-foreground: oklch(0.19 0.035 248);
+
+  --muted: oklch(0.26 0.042 248);
+  --muted-foreground: oklch(0.72 0.02 248);
+
+  --destructive: oklch(0.6 0.22 27);
+  --destructive-foreground: oklch(0.98 0.005 248);
+
+  --border: oklch(0.99 0 0 / 12%);
+  --input: oklch(0.99 0 0 / 16%);
+  --ring: oklch(0.7 0.13 200);
+
+  --gradient-brand: linear-gradient(
+    100deg,
+    oklch(0.58 0.165 259),
+    oklch(0.68 0.13 200),
+    oklch(0.76 0.175 133)
+  );
+  --gradient-veil: radial-gradient(
+    120% 90% at 50% 0%,
+    oklch(0.32 0.08 255 / 55%),
+    transparent 70%
+  );
+  --shadow-depth: 0 24px 60px -28px oklch(0.05 0.03 250 / 90%);
+  --shadow-glow: 0 0 0 1px oklch(0.76 0.175 133 / 22%),
+    0 20px 60px -30px oklch(0.58 0.165 259 / 80%);
+  --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  .font-display {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background: oklch(0.76 0.175 133 / 35%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  [data-reveal], [data-page-content] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+@utility text-gradient-brand {
+  background-image: var(--gradient-brand);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+@utility bg-gradient-brand {
+  background-image: var(--gradient-brand);
+}
+
+@utility surface-panel {
+  background-color: var(--surface);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-depth);
+}
+
+@utility shadow-depth {
+  box-shadow: var(--shadow-depth);
+}
+
+@utility shadow-glow {
+  box-shadow: var(--shadow-glow);
+}
+
+@utility veil {
+  background-image: var(--gradient-veil);
+}
+
+/* AOS letterhead-derived geometric motif: angled navy/green ribbon */
+@utility ribbon {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+    height: 2px;
+    background-image: var(--gradient-brand);
+    opacity: 0.55;
+  }
+}
+
+@utility grid-mesh {
+  background-image: linear-gradient(
+      to right,
+      oklch(0.99 0 0 / 5%) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, oklch(0.99 0 0 / 5%) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+@utility eyebrow {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* ===== Premium upgrade: light editorial sections (DARK → LIGHT rhythm) ===== */
+.theme-light {
+  --background: oklch(0.975 0.006 240);
+  --foreground: oklch(0.2 0.04 252);
+  --surface: oklch(1 0 0);
+  --surface-2: oklch(0.945 0.01 240);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.2 0.04 252);
+  --muted: oklch(0.94 0.01 240);
+  --muted-foreground: oklch(0.45 0.03 250);
+  --accent: oklch(0.56 0.15 140);
+  --accent-foreground: oklch(0.99 0 0);
+  --primary: oklch(0.5 0.17 259);
+  --border: oklch(0.2 0.04 252 / 12%);
+  --input: oklch(0.2 0.04 252 / 18%);
+  --shadow-depth: 0 24px 50px -30px oklch(0.25 0.05 250 / 35%);
+  --shadow-glow: 0 0 0 1px oklch(0.56 0.15 140 / 25%),
+    0 20px 50px -30px oklch(0.5 0.17 259 / 45%);
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+.theme-deep {
+  --background: oklch(0.13 0.03 250);
+  --foreground: oklch(0.97 0.006 248);
+  --surface: oklch(0.22 0.038 248);
+  --surface-2: oklch(0.26 0.042 248);
+  --muted-foreground: oklch(0.72 0.02 248);
+  --accent: oklch(0.76 0.175 133);
+  --accent-foreground: oklch(0.19 0.035 248);
+  --primary: oklch(0.58 0.165 259);
+  --border: oklch(0.99 0 0 / 12%);
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+/* Fine film grain */
+@utility grain {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.05;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+}
+
+/* Animated underline links */
+@utility link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.4s var(--ease-cinematic);
+  &:hover,
+  &:focus-visible {
+    background-size: 100% 1px;
+  }
+}
+
+/* Metallic sheen for awards */
+@utility metal {
+  background-image: linear-gradient(
+    135deg,
+    oklch(0.99 0 0 / 7%),
+    oklch(0.99 0 0 / 2%) 40%,
+    oklch(0.99 0 0 / 9%) 60%,
+    oklch(0.99 0 0 / 2%)
+  );
+  border: 1px solid oklch(0.99 0 0 / 12%);
+  backdrop-filter: blur(6px);
+}
+
+@utility text-display-xl {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 0.88;
+  letter-spacing: -0.045em;
+  font-size: clamp(3.4rem, 13vw, 11.5rem);
+}
+
+@media (pointer: fine) {
+  .has-cursor,
+  .has-cursor a,
+  .has-cursor button {
+    cursor: none;
+  }
+}
+
+/* ---------- Premium QR frame ---------- */
+.qr-frame {
+  background: linear-gradient(160deg, color-mix(in oklab, var(--primary) 18%, transparent), color-mix(in oklab, var(--accent) 14%, transparent));
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--accent) 35%, transparent), 0 30px 80px -30px color-mix(in oklab, var(--primary) 60%, transparent);
+}
+.qr-corner {
+  position: absolute;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-color: var(--accent);
+}
+.qr-scan {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 18%;
+  background: linear-gradient(to bottom, transparent, color-mix(in oklab, var(--accent) 45%, transparent), transparent);
+  animation: qr-scan 3.2s ease-in-out infinite;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+@keyframes qr-scan {
+  0%, 100% { transform: translateY(-20%); }
+  50% { transform: translateY(470%); }
+}
+
+/* ---------- Signature moments marquee ---------- */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee {
+  animation: marquee 60s linear infinite;
+}
+.marquee:hover { animation-play-state: paused; }
+
+/* ---------- Soft pulse for map nodes ---------- */
+@keyframes node-pulse {
+  0% { r: 4; opacity: 0.8; }
+  100% { r: 22; opacity: 0; }
+}
+.node-pulse { animation: node-pulse 2.8s ease-out infinite; }
+
+/* Geographic connections pulse at the mapped destination, without moving the dot. */
+@keyframes map-pulse {
+  from { r: 4; opacity: .7; }
+  to { r: 19; opacity: 0; }
+}
+.map-pulse { animation: map-pulse 3s ease-out infinite; }
